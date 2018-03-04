@@ -1,12 +1,14 @@
 package persoon;
 
+import ObjectUtils.CompareToUtils;
 import ObjectUtils.EqualsUtils;
 import ObjectUtils.HashCodeUtils;
 import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class PersoonTest {
 
@@ -129,5 +131,29 @@ public class PersoonTest {
         persoonSet.remove(p1);
 
         assertEquals(3, persoonSet.size());
+    }
+
+    //opdr 1.5
+    @Test
+    public void testComparables(){
+        //compareTo method in Persoon ingevuld
+
+        Persoon p1 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p2 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        //vóór persoon 1 en 2
+        Persoon p3 = new Persoon("Rutte", "Mark", new Date(315510000), "Den Haag", "Nederland");
+        //ná persoon 1, 2 en 3
+        Persoon p4 = new Persoon("Trump", "Donald", new Date(315550000), "Boston", "United States");
+        Persoon p5 = null;
+
+        assertEquals(true, CompareToUtils.checkEqualsVsSort(p1, p2));
+        assertEquals(true, CompareToUtils.checkEqualsVsSort(p1, p3));
+        assertEquals(true, CompareToUtils.checkEqualsVsSort(p2, p4));
+        try{
+            CompareToUtils.checkEqualsVsSort(p2, p5);
+            fail("Nullpointer expected");
+        }catch (NullPointerException npe){
+            assertEquals(1, 1);
+        }
     }
 }

@@ -51,8 +51,19 @@ public class Persoon implements Comparable {
      */
     @Override
     public int compareTo(Object t) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //Todo
+        /*throw new UnsupportedOperationException("Not supported yet.");
+        //Todo*/
+        //in de constructor wordt afgedwongen dat Date is ingevuld, daarmee is date een geschikte kandidaat om ordening op toe te passen.
+        if (t == null){
+            throw new NullPointerException();
+        }
+        if (t instanceof Persoon){
+            Persoon other = (Persoon)t;
+            return this.birthDate.compareTo(other.birthDate);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
