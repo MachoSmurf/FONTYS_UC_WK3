@@ -100,7 +100,9 @@ public class PersoonTest {
         Persoon p5 = null;
 
         //controlleer hashCodes:
+        //twee objecten met dezelfde inhoud, deze moet slagen
         assertEquals(true, HashCodeUtils.compareHash(p1, p2));
+        //twee objecten met verschillende inhoud, deze moet falen
         assertEquals(false, HashCodeUtils.compareHash(p1, p3));
         try{
             HashCodeUtils.compareHash(p1, p5);
@@ -108,6 +110,8 @@ public class PersoonTest {
         }catch (NullPointerException npe){
             assertEquals(1, 1);
         }
+        //Noot op bovenstaande: zonder hardcoded hashes in de code op te nemen is het deel van het contract dat
+        // beschrijft dat twee dezelfde hashes niet per definitie dezelfde inhoud hebben, niet te testen.
 
         Set<Persoon> persoonSet = new HashSet<>();
         persoonSet.add(p1);
