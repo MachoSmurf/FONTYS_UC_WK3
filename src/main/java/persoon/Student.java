@@ -27,5 +27,16 @@ public class Student extends Persoon{
     public void setStudentNr(long studentNr) {
         this.studentNr = studentNr;
     }
-    
+
+    //opdr 1.6
+    @Override
+    public boolean equals(Object other){
+        if (this != other){
+            Student o = (Student)other;
+            if (o.studentNr == this.studentNr){
+                return true;
+            }
+        }
+        return false;
+    }
 }

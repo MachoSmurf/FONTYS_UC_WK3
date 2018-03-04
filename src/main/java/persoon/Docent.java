@@ -28,4 +28,15 @@ public class Docent extends Persoon {
         this.loginAccountNr = loginAccountNr;
     }
 
+    //opdr 1.6
+    @Override
+    public boolean equals(Object other){
+        if (this != other){
+            Docent o = (Docent)other;
+            if (o.loginAccountNr == this.loginAccountNr){
+                return true;
+            }
+        }
+        return false;
+    }
 }
