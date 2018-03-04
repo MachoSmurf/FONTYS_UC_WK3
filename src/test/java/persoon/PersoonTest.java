@@ -3,9 +3,7 @@ package persoon;
 import ObjectUtils.EqualsUtils;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -56,6 +54,7 @@ public class PersoonTest {
         }
     }
 
+    //opdr 1.3
     @Test
     public void testList(){
         Persoon p1 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
@@ -86,5 +85,36 @@ public class PersoonTest {
         assertEquals(2, persoonList.size());
         //Hierboven is te zien dat hetzelfde object twee keer verwijderd kan worden, terwijl dit object maar één keer
         // expliciet is toegevoegd.
+    }
+
+    //opdr 1.4
+    @Test
+    public void testHashSet(){
+        Persoon p1 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p2 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p3 = new Persoon("Rutte", "Mark", new Date(315532800), "Den Haag", "Nederland");
+        Persoon p4 = new Persoon("Trump", "Donald", new Date(315532800), "Boston", "United States");
+
+        Set<Persoon> persoonSet = new HashSet<>();
+        persoonSet.add(p1);
+        persoonSet.add(p2);
+        persoonSet.add(p3);
+        persoonSet.add(p4);
+        assertEquals(4, persoonSet.size());
+
+        assertEquals(true, persoonSet.contains(p1));
+        assertEquals(true, persoonSet.contains(p2));
+        assertEquals(true, persoonSet.contains(p3));
+
+        persoonSet.remove(p1);
+        persoonSet.remove(p1);
+
+        assertEquals(3, persoonSet.size() );
+
+        //het verschil met bovenstaande is dat HashSet de verwijdering doet op basis van de hash behorend bij het object
+        // (standaard het geheugen adres). Ieder object is in deze manier van werken dus uniek. Het is afhankelijk van de
+        // gewenste functionaliteit of hier aanpassingen op moeten. De opdracht is hierin niet duidelijk.
+        //in dit geval is p1 != p2 voor de HashSet
+
     }
 }

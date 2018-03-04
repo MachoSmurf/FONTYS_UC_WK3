@@ -59,6 +59,7 @@ public class Persoon implements Comparable {
         if (other == null){
             return false;
         }
+        if (other == this) return true;
         if (other.getClass().equals(Persoon.class)){
             Persoon p2 = (Persoon) other;
             return ((p2.firstname.equals(firstname))
