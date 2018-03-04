@@ -56,6 +56,9 @@ public class Persoon implements Comparable {
 
     @Override
     public boolean equals(Object other){
+        if (other == null){
+            return false;
+        }
         if (other.getClass().equals(Persoon.class)){
             Persoon p2 = (Persoon) other;
             return ((p2.firstname.equals(firstname))
