@@ -13,6 +13,7 @@ public class HashCodeUtils {
     // TODO: add utility methods to test specific parts of the hashcode JAVA
     // contract, as specified in the JavaDoc for Object.
     
-    
-    
+    public static boolean compareHash(Object a, Object b){
+        return (a.hashCode() == b.hashCode());
+    }
 }

@@ -3,6 +3,7 @@ package persoon;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * persoon object
@@ -68,5 +69,10 @@ public class Persoon implements Comparable {
                     && (p2.birthCountry.equals(birthCountry)));
         }
         return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(BSN, familyname, firstname, birthDate, birthPlace, birthCountry);
     }
 }

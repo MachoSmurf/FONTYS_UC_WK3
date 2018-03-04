@@ -1,6 +1,7 @@
 package persoon;
 
 import ObjectUtils.EqualsUtils;
+import ObjectUtils.HashCodeUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -90,16 +91,31 @@ public class PersoonTest {
     //opdr 1.4
     @Test
     public void testHashSet(){
+        //Aan de klasse Persoon is een override toegevoegd voor de hashcode. Hierdoor wordt het contract afgedwongen: twee
+        // objecten met gelijke inhoud hebben dezelfde hash, maar twee objecten met dezelfde hash hoeven niet perse dezelfde inhoud te hebben
         Persoon p1 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
         Persoon p2 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
         Persoon p3 = new Persoon("Rutte", "Mark", new Date(315532800), "Den Haag", "Nederland");
         Persoon p4 = new Persoon("Trump", "Donald", new Date(315532800), "Boston", "United States");
+        Persoon p5 = null;
+
+        //controlleer hashCodes:
+        assertEquals(true, HashCodeUtils.compareHash(p1, p2));
+        assertEquals(false, HashCodeUtils.compareHash(p1, p3));
+        try{
+            HashCodeUtils.compareHash(p1, p5);
+            fail("Nullpointer was expected");
+        }catch (NullPointerException npe){
+            assertEquals(1, 1);
+        }
 
         Set<Persoon> persoonSet = new HashSet<>();
         persoonSet.add(p1);
         persoonSet.add(p2);
         persoonSet.add(p3);
         persoonSet.add(p4);
+        persoonSet.add(p5);
+        //hashset voegt bij gelijke hash de nieuwe waarde niet toe (https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html#add%28E%29)
         assertEquals(4, persoonSet.size());
 
         assertEquals(true, persoonSet.contains(p1));
@@ -107,14 +123,7 @@ public class PersoonTest {
         assertEquals(true, persoonSet.contains(p3));
 
         persoonSet.remove(p1);
-        persoonSet.remove(p1);
 
-        assertEquals(3, persoonSet.size() );
-
-        //het verschil met bovenstaande is dat HashSet de verwijdering doet op basis van de hash behorend bij het object
-        // (standaard het geheugen adres). Ieder object is in deze manier van werken dus uniek. Het is afhankelijk van de
-        // gewenste functionaliteit of hier aanpassingen op moeten. De opdracht is hierin niet duidelijk.
-        //in dit geval is p1 != p2 voor de HashSet
-
+        assertEquals(3, persoonSet.size());
     }
 }
