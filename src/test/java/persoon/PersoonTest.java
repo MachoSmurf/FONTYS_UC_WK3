@@ -3,7 +3,9 @@ package persoon;
 import ObjectUtils.EqualsUtils;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,5 +54,37 @@ public class PersoonTest {
         catch (NullPointerException ex){
             assertEquals(true, true);
         }
+    }
+
+    @Test
+    public void testList(){
+        Persoon p1 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p2 = new Persoon("Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p3 = new Persoon("Rutte", "Mark", new Date(315532800), "Den Haag", "Nederland");
+        Persoon p4 = new Persoon("Trump", "Donald", new Date(315532800), "Boston", "United States");
+
+        List<Persoon> persoonList = new ArrayList<>();
+        persoonList.add(p1);
+        persoonList.add(p2);
+        assertEquals(2, persoonList.size());
+        persoonList.add(p3);
+        persoonList.add(p4);
+        assertEquals(4, persoonList.size());
+
+        //Contains gebruikt equals om de juiste elementen terug te vinden: https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#contains-java.lang.Object-
+        //Dat betekend dat er onverwacht gedrag kan optreden wanneer p1 of p2 gezocht gaan worden. Een oplossing zou
+        // kunnen zijn om een eigen list implementatie te schrijven en daarin de hashcode van objecten te gebruiken in
+        // contains. Beter zou zijn om een implementatie van een verzameling te gebruiken die standaard al gebruik maakt
+        // van de hashcode
+        assertEquals(true, persoonList.contains(p3));
+        assertEquals(true, persoonList.contains(p1));
+        assertEquals(true, persoonList.contains(p2));
+
+        persoonList.remove(p1);
+        assertEquals(3, persoonList.size());
+        persoonList.remove(p1);
+        assertEquals(2, persoonList.size());
+        //Hierboven is te zien dat hetzelfde object twee keer verwijderd kan worden, terwijl dit object maar één keer
+        // expliciet is toegevoegd.
     }
 }
