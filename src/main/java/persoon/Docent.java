@@ -31,7 +31,9 @@ public class Docent extends Persoon {
     //opdr 1.6
     @Override
     public boolean equals(Object other){
-        if (this != other){
+        if (other instanceof Docent){
+            if (this == other) {return true;}
+
             Docent o = (Docent)other;
             if (o.loginAccountNr == this.loginAccountNr){
                 return true;

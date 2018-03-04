@@ -156,4 +156,41 @@ public class PersoonTest {
             assertEquals(1, 1);
         }
     }
+
+    //opdr 1.6 / opdr 1.7
+    @Test
+    public void testDocentStudent(){
+        Persoon p1 = new Student(123456, "Janssen", "Jan", new Date(315532800), "Amsterdam", "Nederland");
+        Persoon p2 = new Student(123457, "Pietsers", "Henk", new Date(315932800), "Amsterdam", "Nederland");
+        Persoon p3 = new Student(123458, "Trump", "Donald", new Date(315932800), "Amsterdam", "Verenigde Staten");
+
+        Persoon p4 = new Docent(54789, "Fritsen", "Julia", new Date(315132800), "Den Haag", "Nederland");
+        Persoon p5 = new Docent(65894, "Vliet", "Frans", new Date(315152800), "Utrecht", "Nederland");
+        Persoon p6 = new Docent(65894, "Duck", "Donald", new Date(315165800), "Duckstad", "Nederland");
+
+        List<Persoon> personen = new ArrayList<>();
+        personen.add(p1);
+        personen.add(p2);
+        personen.add(p3);
+        personen.add(p4);
+        personen.add(p5);
+        personen.add(p6);
+        assertEquals(6, personen.size());
+
+        System.out.println("Persoon\t" + " - Persoon2\t\t" + "Equals (T/F)\t" + "compareTo(+,0,-)");
+        for(int i=1; i<=6; i++){
+            for (int j=1; j<=6; j++){
+                Persoon base = personen.get(i-1);
+                Persoon other = personen.get(j-1);
+
+                boolean equal = base.equals(other);
+                int compResult = base.compareTo(other);
+
+                System.out.println(i + "\t\t\t" + j + "\t\t\t" + equal + "\t\t\t" + compResult);
+            }
+        }
+
+        //Bovenstaande resultaten kloppen, ook wanneer twee Docenten hetzelfde accountnummer hebben worden ze (zoals in
+        // de opdracht beschreven) als hetzelfde persoon gezien. Dit kan gecontroleerd worden door de accountnummers aan te passen.
+    }
 }
