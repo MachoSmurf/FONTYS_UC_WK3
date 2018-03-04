@@ -192,5 +192,11 @@ public class PersoonTest {
 
         //Bovenstaande resultaten kloppen, ook wanneer twee Docenten hetzelfde accountnummer hebben worden ze (zoals in
         // de opdracht beschreven) als hetzelfde persoon gezien. Dit kan gecontroleerd worden door de accountnummers aan te passen.
+
+
+        //Antw 1.8: Nee, niet volledig. De vergelijkingsmethode zorgt ervoor dat (zie output persoon 2 vs persoon 3) een
+        // compareTo resultaat van 0 niet per definitie een Equals true oplevert (zelfde geboortedatum).
+
+
     }
 }
