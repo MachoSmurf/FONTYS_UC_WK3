@@ -54,4 +54,15 @@ public class Persoon implements Comparable {
         //Todo
     }
 
+    @Override
+    public boolean equals(Object other){
+        if (other.getClass().equals(Persoon.class)){
+            Persoon p2 = (Persoon) other;
+            return ((p2.firstname.equals(firstname))
+                    && (p2.familyname.equals(familyname))
+                    && (p2.birthDate.equals(birthDate))
+                    && (p2.birthCountry.equals(birthCountry)));
+        }
+        return false;
+    }
 }
